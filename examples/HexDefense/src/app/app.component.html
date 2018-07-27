@@ -1,0 +1,13 @@
+<div #container id="container" (window:resize)="onResize()"  oncontextmenu="return false;">
+  <div id="health">
+    <div *ngFor="let x of [].constructor(lives >= 0 ? lives : 0)">❤️</div>
+  </div>
+  <div id="gold">{{gold}} 💎</div>
+  <canvas #canvas id="canvas"></canvas>
+</div>
+<div id="toolbar">
+  <div *ngFor="let Tower of towerTypes" id="towerType" (click)="this.selectedTower = Tower" [class.isSelected]="Tower === this.selectedTower">
+    <div>{{Tower.metadata.name}}</div>
+    <div>{{Tower.metadata.price}} 💎</div>
+  </div>
+</div>
