@@ -9,7 +9,7 @@ export class BombTower extends Tower {
     public readonly range = 6;
 
     constructor(position: Hex) {
-        super(position, '../../assets/tower.png');
+        super(position, '../../assets/bombtower.png');
     }
 
     getProjectile(target: Enemy): IProjectile {

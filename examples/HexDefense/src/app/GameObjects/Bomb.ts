@@ -10,7 +10,7 @@ export class Bomb extends GameObject implements IProjectile {
     public direction: Hex;
 
     constructor(position: Hex, public target: Enemy) {
-        super(position, '../../assets/bullet.png');
+        super(position, '../../assets/bomb.png');
 
         const vector = target.position.subtract(position);
         this.direction = vector.normalize();

@@ -9,7 +9,7 @@ export class StandardTower extends Tower {
     public readonly range = 3;
 
     constructor(position: Hex) {
-        super(position, '../../assets/tower.png');
+        super(position, '../../assets/standardtower.png');
     }
 
     getProjectile(target: Enemy): IProjectile {
