@@ -2,6 +2,7 @@ import { IMovable } from './IMovable';
 import { Enemy } from './Enemy';
 
 export interface IProjectile extends IMovable {
-    damage: number;
-    target: Enemy;
+    readonly damage: number;
+    readonly target: Enemy;
+    readonly areaOfEffectRange: number;
 }

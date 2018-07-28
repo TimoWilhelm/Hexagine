@@ -26,12 +26,12 @@ export class AppComponent extends GameLoop implements AfterViewInit {
   private canvasRef: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
 
-  private lives = 10;
-  private gold = 1000;
+  public lives = 10;
+  public gold = 1000;
 
-  private towerTypes = [
-    new TowerFactory(StandardTower, {price: 200, name: 'Standard Turrret'}),
-    new TowerFactory(BombTower, {price: 400, name: 'Bomb Tower'}),
+  public towerTypes = [
+    new TowerFactory(StandardTower, { price: 200, name: 'Standard Turrret' }),
+    new TowerFactory(BombTower, { price: 400, name: 'Bomb Tower' }),
   ];
   private selectedTower = this.towerTypes[0];
 
@@ -63,7 +63,7 @@ export class AppComponent extends GameLoop implements AfterViewInit {
     this.hexMap = new HexMap(hexagons);
   }
 
-  @HostListener('document:mousemove',  ['$event'])
+  @HostListener('document:mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
     this.selectedHex = this.layout.pixelToHex(new Vec2D(e.clientX, e.clientY)).round();
   }
@@ -140,7 +140,7 @@ export class AppComponent extends GameLoop implements AfterViewInit {
         imageHeight);
     }
     if (gameObject instanceof Enemy) {
-      this.renderHealthBar(pixelPosition, gameObject.MAX_HEALTH, gameObject.health);
+      this.renderHealthBar(pixelPosition, gameObject.maxHealth, gameObject.health);
     }
   }
 
@@ -176,11 +176,9 @@ export class AppComponent extends GameLoop implements AfterViewInit {
     });
     this.lastDrawTime = currentDrawTime;
   }
-
   public update(updateTick: number) {
     const currentUpdateTime = utc();
     const elapsedMilliseconds = duration(currentUpdateTime.diff(this.lastUpdateTime)).asMilliseconds();
-
     if (duration(currentUpdateTime.diff(this.lastEnemySpawn)).asSeconds() > this.EnemySpawnRate) {
       this.enemies.push(new Enemy(this.start));
       this.lastEnemySpawn = currentUpdateTime;
@@ -200,25 +198,44 @@ export class AppComponent extends GameLoop implements AfterViewInit {
   }
 
   private updateProjectiles(elapsedMilliseconds: number) {
-    this.projectiles.forEach((projectile, index) => {
+    const projectiles = [...this.projectiles];
+    for (const projectile of projectiles) {
       const targetVector = projectile.target.position.subtract(projectile.position);
       const newPosition = projectile.position.add(projectile.direction.scale(elapsedMilliseconds * projectile.speed / 1000));
       const travelVector = newPosition.subtract(projectile.position);
       if (travelVector.getNorm() > targetVector.getNorm()) {
-        projectile.target.health -= projectile.damage;
-        if (projectile.target.health <= 0) {
-          this.gold += projectile.target.BOUNTY;
-          this.enemies = this.enemies.filter((enemy) => enemy !== projectile.target);
+        if (projectile.areaOfEffectRange === 0) {
+          // Single Target
+          projectile.target.health -= projectile.damage;
+          if (projectile.target.health <= 0) {
+            this.gold += projectile.target.bounty;
+            this. enemies = this.enemies.filter((e) => e !== projectile.target);
+          }
+        } else {
+          // Area of Effect
+          const enemies = [...this.enemies];
+          for (const enemy of enemies) {
+            const distanceToTarget = enemy.position.manhattanDistance(projectile.target.position);
+            if (distanceToTarget <= projectile.areaOfEffectRange) {
+              const damage = projectile.damage * (projectile.areaOfEffectRange - distanceToTarget) / projectile.areaOfEffectRange;
+              enemy.health -= Math.floor(damage);
+              if (enemy.health <= 0) {
+                this.gold += enemy.bounty;
+                this.enemies = this.enemies.filter((e) => e !== enemy);
+              }
+            }
+          }
         }
-        this.projectiles.splice(index, 1);
+        this.projectiles = this.projectiles.filter((p) => p !== projectile);
       }
       projectile.direction = targetVector.normalize();
       projectile.position = newPosition;
-    });
+    }
   }
 
   private updateEnemies(elapsedMilliseconds: number) {
-    this.enemies.forEach((enemy, index) => {
+    const enemies = [...this.enemies];
+    for (const enemy of enemies) {
       const roundedHex = enemy.position.round();
       const newPosition = enemy.position.add(enemy.direction.scale(elapsedMilliseconds * enemy.speed / 1000));
       let roundedHexIndex = this.enemyPath.findIndex((element) => element.equals(roundedHex));
@@ -234,10 +251,10 @@ export class AppComponent extends GameLoop implements AfterViewInit {
         enemy.position = newPosition;
       }
       if (enemy.position.round().equals(this.goal)) {
-        this.enemies.splice(index, 1);
+        this.enemies = this.enemies.filter((e) => e !== enemy);
         this.lives -= 1;
       }
-    });
+    }
   }
 
   private updateTowers(currentUpdateTime: Moment) {

@@ -6,6 +6,7 @@ import { IProjectile } from './IProjectile';
 export class Bomb extends GameObject implements IProjectile {
     public readonly speed = 3;
     public readonly damage = 3;
+    public readonly areaOfEffectRange = 2;
 
     public direction: Hex;
 
