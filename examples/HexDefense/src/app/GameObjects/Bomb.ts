@@ -4,16 +4,16 @@ import { Enemy } from './Enemy';
 import { IProjectile } from './IProjectile';
 
 export class Bomb extends GameObject implements IProjectile {
-    public readonly speed = 3;
-    public readonly damage = 3;
-    public readonly areaOfEffectRange = 2;
+  public readonly speed = 3;
+  public readonly damage = 3;
+  public readonly areaOfEffectRange = 2;
 
-    public direction: Hex;
+  public direction: Hex;
 
-    constructor(position: Hex, public target: Enemy) {
-        super(position, '../../assets/bomb.png');
+  constructor(position: Hex, public target: Enemy) {
+    super(position, '../../assets/bomb.png');
 
-        const vector = target.position.subtract(position);
-        this.direction = vector.normalize();
-    }
+    const vector = target.position.subtract(position);
+    this.direction = vector.normalize();
+  }
 }

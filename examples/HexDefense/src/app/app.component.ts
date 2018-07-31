@@ -162,7 +162,7 @@ export class AppComponent extends GameLoop implements AfterViewInit {
 
     const selectedTower = this.towers.find((tower) => tower.position.equals(this.selectedHex));
     if (selectedTower !== undefined) {
-      this.strokeCircle(this.layout.hexToPixel(this.selectedHex), (selectedTower.range * this.layout.size.getNorm()));
+      this.strokeCircle(this.layout.hexToPixel(this.selectedHex), selectedTower.range * this.layout.size.getNorm());
     }
 
     this.enemies.forEach((enemy) => {
@@ -176,6 +176,7 @@ export class AppComponent extends GameLoop implements AfterViewInit {
     });
     this.lastDrawTime = currentDrawTime;
   }
+
   public update(updateTick: number) {
     const currentUpdateTime = utc();
     const elapsedMilliseconds = duration(currentUpdateTime.diff(this.lastUpdateTime)).asMilliseconds();
@@ -215,10 +216,10 @@ export class AppComponent extends GameLoop implements AfterViewInit {
           // Area of Effect
           const enemies = [...this.enemies];
           for (const enemy of enemies) {
-            const distanceToTarget = enemy.position.manhattanDistance(projectile.target.position);
+            const distanceToTarget = enemy.position.euclideanDistance(projectile.target.position);
             if (distanceToTarget <= projectile.areaOfEffectRange) {
               const damage = projectile.damage * (projectile.areaOfEffectRange - distanceToTarget) / projectile.areaOfEffectRange;
-              enemy.health -= Math.floor(damage);
+              enemy.health -= Math.ceil(damage);
               if (enemy.health <= 0) {
                 this.gold += enemy.bounty;
                 this.enemies = this.enemies.filter((e) => e !== enemy);
@@ -316,6 +317,13 @@ export class AppComponent extends GameLoop implements AfterViewInit {
     this.ctx.beginPath();
     this.ctx.arc(origin.x, origin.y, radius, 0, 2 * Math.PI);
     this.ctx.stroke();
+  }
+
+  private fillCircle(origin: Vec2D, radius: number, color: string = '#000000') {
+    this.ctx.fillStyle = color;
+    this.ctx.beginPath();
+    this.ctx.arc(origin.x, origin.y, radius, 0, 2 * Math.PI);
+    this.ctx.fill();
   }
 
   private findClosestEnemy(position: Hex, enemies: Enemy[]): Enemy {
