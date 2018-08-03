@@ -1,19 +1,13 @@
-import { GameObject } from './GameObject';
 import { Hex } from '@hexagine/index';
 import { Enemy } from './Enemy';
-import { IProjectile } from './IProjectile';
+import { Projectile } from './Projectile';
 
-export class Bomb extends GameObject implements IProjectile {
+export class Bomb extends Projectile {
   public readonly speed = 3;
   public readonly damage = 3;
   public readonly areaOfEffectRange = 2;
 
-  public direction: Hex;
-
-  constructor(position: Hex, public target: Enemy) {
-    super(position, '../../assets/bomb.png');
-
-    const vector = target.position.subtract(position);
-    this.direction = vector.normalize();
+  constructor(position: Hex, target: Enemy) {
+    super(position, target, '../../assets/bomb.png');
   }
 }

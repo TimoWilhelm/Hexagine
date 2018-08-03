@@ -5,5 +5,5 @@ export * from './Tower';
 export * from './IMovable';
 export * from './StandardTower';
 export * from './BombTower';
-export * from './IProjectile';
+export * from './Projectile';
 export * from './TowerFactory';

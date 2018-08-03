@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@
 import { GameLoop } from './GameLoop';
 import { utc, duration, Moment } from 'moment';
 import { HexMap, Hex, Vec2D, Layout, Orientation } from '@hexagine/index';
-import { BombTower, Bullet, Enemy, GameObject, Tower, IMovable, StandardTower, IProjectile, TowerFactory } from './GameObjects';
+import { BombTower, Enemy, GameObject, Tower, IMovable, StandardTower, Projectile, TowerFactory } from './GameObjects';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +43,7 @@ export class AppComponent extends GameLoop implements AfterViewInit {
 
   private enemies: Enemy[] = [];
   private towers: Tower[] = [];
-  private projectiles: IProjectile[] = [];
+  private projectiles: Projectile[] = [];
 
   private start = new Hex(2, 0, -2);
   private goal = new Hex(-3, 10, -7);

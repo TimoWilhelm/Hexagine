@@ -1,6 +1,6 @@
 import { Tower } from './Tower';
 import { Hex } from '@hexagine/index';
-import { IProjectile } from './IProjectile';
+import { Projectile } from './Projectile';
 import { Enemy } from './Enemy';
 import { Bomb } from './Bomb';
 
@@ -12,7 +12,7 @@ export class BombTower extends Tower {
     super(position, '../../assets/bombtower.png');
   }
 
-  getProjectile(target: Enemy): IProjectile {
+  getProjectile(target: Enemy): Projectile {
     return new Bomb(this.position, target);
   }
 }
