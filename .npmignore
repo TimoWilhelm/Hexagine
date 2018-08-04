@@ -1,9 +1,0 @@
-.nyc_output
-.vs
-mocha.opts
-tsconfig*.json
-tslint.json
-
-coverage
-examples
-src
