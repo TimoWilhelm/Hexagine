@@ -1,5 +1,3 @@
-import { makeString } from "typescript-collections/dist/lib/util";
-
 /**
  * Class representing a 2D vector.
  * @export
@@ -20,7 +18,7 @@ export class Vec2D {
    * @memberof Vec2D
    */
   public toString(): string {
-    return makeString(this);
+    return JSON.stringify(this);
   }
 
   /**

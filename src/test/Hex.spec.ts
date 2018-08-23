@@ -255,7 +255,7 @@ describe("Hex", () => {
   describe("ToString", () => {
     it("returns a string with the coordinates of the hexagon", () => {
       const hexA = new Hex(1, 2, -3);
-      const expectedResult = "{q:1,r:2,s:-3}";
+      const expectedResult = '{"q":1,"r":2,"s":-3}';
       expect(hexA.toString()).to.equal(expectedResult);
     });
   });

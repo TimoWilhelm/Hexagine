@@ -1,5 +1,3 @@
-import { makeString } from "typescript-collections/dist/lib/util";
-
 /**
  * Class representing a hexagon.
  * @export
@@ -111,7 +109,7 @@ export class Hex {
    * @memberof Hex
    */
   public toString(): string {
-    return makeString(this);
+    return JSON.stringify(this);
   }
   /**
    * Compares two hexagons for equality. Two hexes are equal if their coordinates are equal.

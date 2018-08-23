@@ -1,4 +1,4 @@
-import { PriorityQueue } from "typescript-collections";
+import PriorityQueue from "typescript-collections/dist/lib/PriorityQueue";
 
 /**
  * Class representing a priority queue of elements with a fixed priority.

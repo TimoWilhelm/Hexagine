@@ -1,5 +1,6 @@
-import { Dictionary, Set } from "typescript-collections";
-import { Hex } from "../Core/Hex";
+import Dictionary from "typescript-collections/dist/lib/Dictionary";
+import Set from "typescript-collections/dist/lib/Set";
+import { Hex } from "./Hex";
 import { FixedPriorityQueue } from "./FixedPriorityQueue";
 import { IPathFindingResult } from "./IPathFindingResult";
 

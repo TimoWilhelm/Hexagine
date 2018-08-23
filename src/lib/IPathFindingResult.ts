@@ -1,5 +1,5 @@
-import { Dictionary } from "typescript-collections";
-import { Hex } from "../Core/Hex";
+import Dictionary from "typescript-collections/dist/lib/Dictionary";
+import { Hex } from "./Hex";
 
 /**
  * Interface for the result of a pathfinding algorithm.

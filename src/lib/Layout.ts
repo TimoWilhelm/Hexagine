@@ -1,5 +1,5 @@
-import { Hex } from "../Core/Hex";
-import { Vec2D } from "../Core/Vec2D";
+import { Hex } from "./Hex";
+import { Vec2D } from "./Vec2D";
 import { Orientation } from "./Orientation";
 
 /**

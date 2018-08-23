@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { FixedPriorityQueue } from "../lib/Map/FixedPriorityQueue";
+import { FixedPriorityQueue } from "../lib/FixedPriorityQueue";
 
 describe("FixedPriorityQueue", () => {
 

@@ -66,7 +66,7 @@ describe("Vec2D", () => {
   describe("ToString", () => {
     it("returns a string with the coordinates of the vector", () => {
       const vecA = new Vec2D(-3, 2);
-      const expectedResult = "{x:-3,y:2}";
+      const expectedResult = '{"x":-3,"y":2}';
       expect(vecA.toString()).to.equal(expectedResult);
     });
   });
