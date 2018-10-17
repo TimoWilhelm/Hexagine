@@ -1,6 +1,6 @@
 {
   "name": "hexagine",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "🎲 Easy to use 2D hex grid game engine based on https://www.redblobgames.com/grids/hexagons/",
   "main": "./bundles/hexagine.umd.js",
   "module": "./module/hexagine.js",
