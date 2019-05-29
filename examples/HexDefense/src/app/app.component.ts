@@ -20,9 +20,9 @@ export class AppComponent extends GameLoop implements AfterViewInit {
 
   private layout: Layout;
 
-  @ViewChild('container')
+  @ViewChild('container', {static: true})
   private containerRef: ElementRef<HTMLDivElement>;
-  @ViewChild('canvas')
+  @ViewChild('canvas', {static: true})
   private canvasRef: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
 
