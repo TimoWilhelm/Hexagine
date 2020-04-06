@@ -1,4 +1,4 @@
-<div #container id="container" (window:resize)="onResize()"  oncontextmenu="return false;">
+<div #container id="container" (window:resize)="onResize()" oncontextmenu="return false;">
   <div id="health">
     <div *ngFor="let x of [].constructor(lives >= 0 ? lives : 0)">❤️</div>
   </div>
