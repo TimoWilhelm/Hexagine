@@ -55,7 +55,7 @@
     "rollup": "^0.64.1",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-sourcemaps": "^0.5.0",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3",
     "uglify-es": "^3.3.9"
