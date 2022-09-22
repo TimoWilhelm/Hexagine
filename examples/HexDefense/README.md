@@ -1,3 +1,0 @@
-# HexDefense
-
-👾 Alien Tower Defense
